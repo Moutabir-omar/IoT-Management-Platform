@@ -24,4 +24,24 @@ def ajouter_objet(request):
             return redirect('objets:liste_objets')
     else:
         form = ObjetConnecteForm()
-    return render(request, 'objets/ajouter_objet.html', {'form': form}) 
+    return render(request, 'objets/ajouter_objet.html', {'form': form})
+
+def edit_objet(request, pk):
+    objet = ObjetConnecte.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = ObjetConnecteForm(request.POST, instance=objet)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Objet connecté modifié avec succès!')
+            return redirect('objets:liste_objets')
+    else:
+        form = ObjetConnecteForm(instance=objet)
+    return render(request, 'objets/edit_objet.html', {'form': form, 'objet': objet})
+
+def delete_objet(request, pk):
+    objet = ObjetConnecte.objects.get(pk=pk)
+    if request.method == 'POST':
+        objet.delete()
+        messages.success(request, 'Objet connecté supprimé avec succès!')
+        return redirect('objets:liste_objets')
+    return render(request, 'objets/delete_objet.html', {'objet': objet}) 
