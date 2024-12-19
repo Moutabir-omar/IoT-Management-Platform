@@ -1,4 +1,4 @@
-# 🌟 IoT Management Platform
+# IoT Management Platform
 
 A powerful Django-based web application for managing IoT devices and objects. This platform provides a user-friendly interface for tracking, monitoring, and managing various IoT devices and their associated data. 🚀
 
