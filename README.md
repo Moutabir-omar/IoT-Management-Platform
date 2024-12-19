@@ -2,6 +2,24 @@
 
 A powerful Django-based web application for managing IoT devices and objects. This platform provides a user-friendly interface for tracking, monitoring, and managing various IoT devices and their associated data. 🚀
 
+## 📸 Screenshots
+
+### Home Page
+![Home Page](https://raw.githubusercontent.com/Moutabir-omar/IoT-Management-Platform/main/docs/images/home.png)
+*Modern and intuitive home page with key features and statistics*
+
+### IoT Objects List
+![Objects List](https://raw.githubusercontent.com/Moutabir-omar/IoT-Management-Platform/main/docs/images/objects-list.png)
+*Comprehensive list of connected objects with detailed information*
+
+### Admin Dashboard
+![Admin Dashboard](https://raw.githubusercontent.com/Moutabir-omar/IoT-Management-Platform/main/docs/images/admin.png)
+*Powerful Django administration interface for managing the platform*
+
+### Object Management
+![Delete Object](https://raw.githubusercontent.com/Moutabir-omar/IoT-Management-Platform/main/docs/images/delete-object.png)
+*Safe and secure object management with confirmation dialogs*
+
 ## ✨ Features
 
 - 🔐 User authentication and authorization
