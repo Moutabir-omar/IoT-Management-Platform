@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="mb-0"><i class="bi bi-list-ul"></i> Liste des Objets Connectés</h4>
+        <a href="{% url 'objets:ajouter_objet' %}" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> Ajouter un objet
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th><i class="bi bi-tag"></i> Nom</th>
+                        <th><i class="bi bi-diagram-2"></i> Type</th>
+                        <th><i class="bi bi-circle"></i> État</th>
+                        <th><i class="bi bi-geo-alt"></i> Localisation</th>
+                        <th><i class="bi bi-calendar"></i> Date d'installation</th>
+                        <th><i class="bi bi-gear"></i> Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for objet in objets %}
+                    <tr>
+                        <td>{{ objet.nom }}</td>
+                        <td>
+                            <span class="badge bg-info">{{ objet.get_type_objet_display }}</span>
+                        </td>
+                        <td>
+                            {% if objet.etat == 'ACTIF' %}
+                                <span class="badge bg-success">{{ objet.get_etat_display }}</span>
+                            {% elif objet.etat == 'INACTIF' %}
+                                <span class="badge bg-danger">{{ objet.get_etat_display }}</span>
+                            {% else %}
+                                <span class="badge bg-warning">{{ objet.get_etat_display }}</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ objet.localisation }}</td>
+                        <td>{{ objet.date_installation }}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary" title="Éditer">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" title="Supprimer">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">
+                            <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+                            Aucun objet connecté n'a été ajouté
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %} 

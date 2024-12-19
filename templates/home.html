@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="card mb-4">
+    <div class="card-body text-center py-5" style="background: linear-gradient(rgba(13, 110, 253, 0.9), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1518770660439-4636190af475') center/cover;">
+        <h1 class="display-4 text-white mb-4">Plateforme de Gestion des Objets Connectés</h1>
+        <p class="lead text-white mb-4">Une solution moderne pour gérer vos appareils IoT de manière efficace et intuitive</p>
+        <a href="{% url 'objets:liste_objets' %}" class="btn btn-primary btn-lg">
+            <i class="bi bi-grid"></i> Gérer mes Objets
+        </a>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="row mb-5">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-cpu-fill display-4 text-primary mb-3"></i>
+                <h3>Gestion Intelligente</h3>
+                <p class="text-muted">Suivez l'état de vos objets connectés en temps réel avec une interface intuitive.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-graph-up display-4 text-primary mb-3"></i>
+                <h3>Analyse Détaillée</h3>
+                <p class="text-muted">Visualisez les performances et l'état de votre parc d'objets connectés.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-shield-check display-4 text-primary mb-3"></i>
+                <h3>Sécurité Avancée</h3>
+                <p class="text-muted">Protégez vos données avec des systèmes de sécurité de pointe.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Statistics Section -->
+<div class="row mb-5">
+    <div class="col-md-6 mb-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body text-center">
+                <h2 class="display-4">{{ objets_actifs.count }}</h2>
+                <p class="lead">Objets Actifs</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="card bg-secondary text-white">
+            <div class="card-body text-center">
+                <h2 class="display-4">{{ objets_inactifs.count }}</h2>
+                <p class="lead">Objets Inactifs</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Objects Section -->
+<div class="card mb-5">
+    <div class="card-header bg-white">
+        <h3 class="mb-0"><i class="bi bi-clock-history"></i> Objets Récemment Ajoutés</h3>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th><i class="bi bi-tag"></i> Nom</th>
+                        <th><i class="bi bi-diagram-2"></i> Type</th>
+                        <th><i class="bi bi-circle"></i> État</th>
+                        <th><i class="bi bi-calendar"></i> Date d'installation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for objet in objets_recents %}
+                    <tr>
+                        <td>{{ objet.nom }}</td>
+                        <td><span class="badge bg-info">{{ objet.get_type_objet_display }}</span></td>
+                        <td>
+                            {% if objet.etat == 'ACTIF' %}
+                                <span class="badge bg-success">{{ objet.get_etat_display }}</span>
+                            {% else %}
+                                <span class="badge bg-danger">{{ objet.get_etat_display }}</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ objet.date_installation }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">
+                            <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+                            Aucun objet connecté n'a été ajouté
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- About Developer Section -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="text-center mb-4">À Propos du Développeur</h2>
+        <div class="row align-items-center">
+            <div class="col-md-4 text-center mb-4">
+                <img src="{% static 'images/omar-profile.jpg' %}?v=1" 
+                     alt="Omar Moutabir" 
+                     class="img-fluid rounded-circle shadow-lg" 
+                     style="width: 300px; height: 300px; object-fit: cover; border: 4px solid #0d6efd;">
+            </div>
+            <div class="col-md-8">
+                <h3 class="text-primary mb-3">Omar Moutabir</h3>
+                <p class="lead mb-4">Étudiant en Génie Mécatronique et Systèmes Intelligents</p>
+                <blockquote class="blockquote border-start border-primary ps-4 ms-3">
+                    <p class="mb-0 fst-italic">
+                        "La fusion de la mécanique et de l'intelligence artificielle nous permet de créer des solutions 
+                        innovantes qui transforment notre façon d'interagir avec la technologie. Chaque ligne de code 
+                        est une étape vers un avenir plus intelligent et connecté."
+                    </p>
+                </blockquote>
+                <p class="text-muted mt-4">
+                    Passionné par l'IoT et l'automatisation, je m'efforce de créer des solutions qui combinent 
+                    l'excellence technique avec une expérience utilisateur intuitive.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="text-center text-muted py-4">
+    <p class="mb-0">© 2024 Développé avec <i class="bi bi-heart-fill text-danger"></i> par Omar Moutabir</p>
+</footer>
+{% endblock %} 
